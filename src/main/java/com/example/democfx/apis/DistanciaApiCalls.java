@@ -17,7 +17,6 @@ public class DistanciaApiCalls {
         String requestBody = objectMapper.writeValueAsString(autenticacionRequest);
         System.out.println("Autent request = " + requestBody);
 
-
         Response response = clientUsers
                 .header("Content-Type", "application/json")
                 .post(requestBody);
@@ -25,6 +24,7 @@ public class DistanciaApiCalls {
         int status = response.getStatus();
         System.out.println("Status: " + status);
         String responseBody = response.readEntity(String.class);
+        
         if (status == 201) {
             System.out.println("Autent response = " + responseBody);
             AutenticacionResponse autenticacionResponse = objectMapper.readValue(responseBody, AutenticacionResponse.class);

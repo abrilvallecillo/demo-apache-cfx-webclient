@@ -6,14 +6,13 @@ import com.example.democfx.apis.GithubApiCalls;
 public class Application {
 
     public static void main(String[] args) throws Exception {
-//        DistanciaApiCalls distanciaRestClient = new DistanciaApiCalls();
+        // DistanciaApiCalls distanciaRestClient = new DistanciaApiCalls();
+        // String token = distanciaRestClient.obtenerToken("myemail5@mail.com");
 
-//        String token = distanciaRestClient.obtenerToken("myemail5@mail.com");
-
+        // Consultar el API publica de GitHub
         GithubApiCalls githubApiCalls = new GithubApiCalls();
-
         githubApiCalls.loguearUsuariosId();
 
-//        System.out.println(token);
+        // System.out.println(token);
     }
 }
