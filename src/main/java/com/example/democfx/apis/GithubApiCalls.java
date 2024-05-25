@@ -9,31 +9,32 @@ import javax.ws.rs.core.Response;
 
 public class GithubApiCalls {
 
-    //ejemplo de get de arrays
+    // Ejemplo de get de arrays
     public void loguearUsuariosId() throws Exception {
         WebClient clientUsers = WebClient.create("https://api.github.com/users?page=2&per_page=10");
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        ObjectMapper objectMapper = new ObjectMapper(); 
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Solamente trae lo que me interesa, el resto ignoralo
 
-        Response response = clientUsers
-                .header("Content-Type", "application/json")
-                .get();
+        Response response = clientUsers.header("Content-Type", "application/json").get(); // Aca hago la llamada
 
         int status = response.getStatus();
-        System.out.println("Status: " + status);
-        String responseBody = response.readEntity(String.class);
-        if (status == 200) {
-            System.out.println("response = " + responseBody);
-            UsuarioResponse[] usuarios = objectMapper.readValue(responseBody, UsuarioResponse[].class);
+        System.out.println("Status: " + status); // Lo imprimo por consola
 
-            for (int i = 0; i < usuarios.length; i++) {
-                System.out.println("ID: " + usuarios[i].getId());
-            }
+        String responseBody = response.readEntity(String.class); // Interpreto la respuesta
+        
+        if (status == 200) { // Camino feliz
+
+            System.out.println("response = " + responseBody);
+            UsuarioResponse[] usuarios = objectMapper.readValue(responseBody, UsuarioResponse[].class); // Sirve para deseñalizar
+
+            for (int i = 0; i < usuarios.length; i++) { System.out.println("ID: " + usuarios[i].getId()); }
 
         } else {
+
             System.out.println("Error response = " + responseBody);
             throw new Exception("Error en la llamada a /api/user");
+            
         }
     }
 }
